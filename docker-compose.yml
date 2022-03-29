@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  openvpn:
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    container_name: openvpn
+    image: ${DOCKER_OVPNIMAGE}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${OVPN_DATA}:/etc/openvpn
+    ports:
+      - "943:943"
+      - "9443:9443"
+      - "1194:1194/udp"
